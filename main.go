@@ -24,7 +24,7 @@ func main() {
 		mail := c.PostForm("mail")
 		nombre := c.PostForm("nombre")
 
-		if mail != "" || nombre != "" {
+		if mail == "" || nombre == "" {
 			c.JSON(http.StatusBadRequest, gin.H{
 				"msg": "Need more properties",
 			})
