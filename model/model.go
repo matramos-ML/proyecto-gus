@@ -7,11 +7,9 @@ type Usuario struct {
 }
 
 // Contains verifica si un usuario esta en la lista
-func Contains(lista []Usuario, mail string) bool {
-	for _, user := range lista {
-		if user.Mail == mail {
-			return true
-		}
+func Contains(usuarios map[string]Usuario, mail string) bool {
+	if _, exist := usuarios[mail]; exist {
+		return true
 	}
 	return false
 }

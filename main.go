@@ -8,7 +8,7 @@ import (
 	"github.com/practicas/service/model"
 )
 
-var usuarios []model.Usuario
+var usuarios map[string]model.Usuario
 
 func main() {
 
@@ -25,17 +25,20 @@ func main() {
 		nombre := c.PostForm("nombre")
 
 		if ok := model.Contains(usuarios, mail); ok == false {
-			usuarios = append(usuarios, model.Usuario{Mail: mail, Nombre: nombre})
-			c.JSON(http.StatusBadRequest, gin.H{
-				"msg": "Mail ya existe",
+			usuarios[mail] = model.Usuario{
+				Mail:   mail,
+				Nombre: nombre,
+			}
+			c.JSON(http.StatusOK, gin.H{
+				"msg": "Usuario creado",
 			})
 			return
 		}
 
-		c.JSON(http.StatusOK, gin.H{
-			"msg": "Usuario creado",
+		c.JSON(http.StatusBadRequest, gin.H{
+			"msg": "Mail ya existe",
 		})
-
+		return
 	})
 
 	router.Run(":80")
