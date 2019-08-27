@@ -8,8 +8,6 @@ type Usuario struct {
 
 // Contains verifica si un usuario esta en la lista
 func Contains(usuarios map[string]Usuario, mail string) bool {
-	if _, exist := usuarios[mail]; exist {
-		return true
-	}
-	return false
+	_, exist := usuarios[mail]
+	return exist
 }
