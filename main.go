@@ -24,7 +24,7 @@ func main() {
 		nombre := c.PostForm("nombre")
 
 		if ok := model.Contains(usuarios, mail); ok == false {
-			usuarios = append(usuarios, model.Usuario{mail, nombre})
+			usuarios = append(usuarios, model.Usuario{Mail: mail, Nombre: nombre})
 		}
 	})
 
