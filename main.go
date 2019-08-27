@@ -8,14 +8,14 @@ import (
 	"github.com/practicas/service/model"
 )
 
-var usuarios map[string]model.Usuario
+var usuarios = make(map[string]model.Usuario)
 
 func main() {
 
 	router := gin.Default()
 
 	router.GET("/users", func(c *gin.Context) {
-		fmt.Println(usuarios)
+		fmt.Println("mapa de usuarios... ", usuarios)
 		c.JSON(http.StatusOK, usuarios)
 	})
 
@@ -24,6 +24,12 @@ func main() {
 		mail := c.PostForm("mail")
 		nombre := c.PostForm("nombre")
 
+		if mail != "" || nombre != "" {
+			c.JSON(http.StatusBadRequest, gin.H{
+				"msg": "Need more properties",
+			})
+			return
+		}
 		if ok := model.Contains(usuarios, mail); ok == false {
 			usuarios[mail] = model.Usuario{
 				Mail:   mail,

@@ -2,7 +2,7 @@ package model
 
 // Usuario es la representacion de un usuario
 type Usuario struct {
-	Mail   string `json:"mail"`
+	Mail   string `json:"mail,omitempty"`
 	Nombre string `json:"nombre"`
 }
 
